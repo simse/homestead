@@ -1,0 +1,2 @@
+docker buildx build --platform linux/arm64,linux/amd64 --tag simsemand/homestead/base -f images/base/Dockerfile .
+docker buildx build --platform linux/arm64,linux/amd64 --tag simsemand/homestead/go -f images/go/Dockerfile .
