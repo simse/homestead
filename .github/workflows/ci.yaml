@@ -9,11 +9,12 @@ jobs:
   build-base:
     name: Build Homestead image
     runs-on: ubuntu-latest
-    #strategy:
-    #  matrix:
-    #    image: ['base','go']
-    #  max-parallel: 1
-    #  fail-fast: true
+    strategy:
+      matrix:
+        image: ['base','go']
+        platform: ['linux/amd64', 'linux/arm64']
+      max-parallel: 1
+      fail-fast: true
 
     steps:
       -
@@ -34,4 +35,4 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       -
         name: Build and push
-        run: bash images/build_all.sh
+        run: bash images/build.sh ${{ matrix.image }} ${{ matrix.platform }}

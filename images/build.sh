@@ -1,0 +1,1 @@
+docker buildx build --platform $2 --tag ghcr.io/simse/homestead/$1 -f images/go/Dockerfile --push images/$1

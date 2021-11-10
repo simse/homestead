@@ -1,2 +1,0 @@
-# docker buildx build --platform linux/arm64,linux/amd64 --tag ghcr.io/simse/homestead/base -f images/base/Dockerfile --push images/base
-docker buildx build --platform linux/arm64 --tag ghcr.io/simse/homestead/go -f images/go/Dockerfile --push images/go

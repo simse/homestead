@@ -1,10 +1,10 @@
-go get -v golang.org/x/tools/gopls
-go get -v github.com/uudashr/gopkgs/v2/cmd/gopkgs
-go get -v github.com/ramya-rao-a/go-outline
-go get -v github.com/cweill/gotests/gotests
-go get -v github.com/fatih/gomodifytags
-go get -v github.com/josharian/impl
-go get -v github.com/haya14busa/goplay/cmd/goplay
-go get -v github.com/go-delve/delve/cmd/dlv
-go get -v github.com/go-delve/delve/cmd/dlv-dap
-go get -v honnef.co/go/tools/cmd/staticcheck
+go install golang.org/x/tools/gopls@latest
+go install github.com/uudashr/gopkgs/v2/cmd/gopkgs@latest
+go install github.com/ramya-rao-a/go-outline@latest
+go install github.com/cweill/gotests/gotests@latest
+go install github.com/fatih/gomodifytags@latest
+go install github.com/josharian/impl@latest
+go install github.com/haya14busa/goplay/cmd/goplay@latest
+go install github.com/go-delve/delve/cmd/dlv@latest
+go install github.com/go-delve/delve/cmd/dlv-dap@latest
+go install honnef.co/go/tools/cmd/staticcheck@latest
