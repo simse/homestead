@@ -9,11 +9,11 @@ jobs:
   build-base:
     name: Build Homestead image
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        image: ['base','go']
-      max-parallel: 1
-      fail-fast: true
+    #strategy:
+    #  matrix:
+    #    image: ['base','go']
+    #  max-parallel: 1
+    #  fail-fast: true
 
     steps:
       -
@@ -34,10 +34,4 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       -
         name: Build and push
-        uses: docker/build-push-action@v2
-        with:
-          context: ./images/${{ matrix.image }}/
-
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: ghcr.io/simse/homestead/${{ matrix.image }}:latest
+        run: bash images/build_all.sh
