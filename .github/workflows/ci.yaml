@@ -9,6 +9,12 @@ jobs:
   build-base:
     name: Build base image
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        image: ['base','go']
+      max-parallel: 1
+      fail-fast: true
+
     steps:
       -
         name: Checkout
@@ -24,14 +30,14 @@ jobs:
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.CR_PAT }}
       -
         name: Build and push
         uses: docker/build-push-action@v2
         with:
-          context: ./images/base/
-          
+          context: ./images/${{ matrix.image }}/
+
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/simse/homestead/base:latest
+          tags: ghcr.io/simse/homestead/${{ matrix.image }}:latest
