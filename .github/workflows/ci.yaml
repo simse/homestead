@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        image: ['base','go']
+        image: ['base']
         platform: ['linux/amd64', 'linux/arm64']
       max-parallel: 2
       fail-fast: true
