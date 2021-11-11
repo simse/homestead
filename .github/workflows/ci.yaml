@@ -53,7 +53,7 @@ jobs:
   build-language-images:
     name: Build Homestead images
     runs-on: ubuntu-latest
-    depends_on: build-base
+    needs: build-base
     strategy:
       matrix:
         image: ['go']
