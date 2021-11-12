@@ -118,11 +118,18 @@ func CmdNew(c *cli.Context) error {
 	//fmt.Println(err)
 
 	// Pull image
-	w2 := wow.New(os.Stdout, spin.Get(spin.Dots), " Pulling Homestead image...")
+	w2 := wow.New(os.Stdout, spin.Get(spin.Dots), " Pulling Homestead image (0.00%)...")
 	w2.Start()
 
 	podImageURL := pod.GetPullURL(pod.DefaultImages[imageIndex], newPodChoices.ImageOption)
-	pod.PullImage(client, podImageURL)
+
+	pullProgess := make(chan float64)
+
+	go pod.PullImage(client, podImageURL, pullProgess)
+
+	for progress := range pullProgess {
+		w2.Text(" Pulling Homestead image (" + fmt.Sprintf("%.2f", progress) + "%)...")
+	}
 
 	w2.PersistWith(spin.Spinner{Frames: tick}, " Homestead image pulled")
 

@@ -1,0 +1,104 @@
+name: Release Homestead
+
+on: push
+
+jobs:
+  #test_source_code:
+  #  name: Test source code
+  #  runs-on: ubuntu-20.04
+  #  steps:
+  #    - name: Checkout code
+  #      uses: actions/checkout@v2
+  #    
+  #    - name: Setup Golang
+  #      uses: actions/setup-go@v2
+  #      with:
+  #        go-version: "^1.16"
+  #
+  #    - name: Run tests
+  #      run: go test
+  
+  #build_binary:
+  #  name: Build binary
+  #  runs-on: ubuntu-20.04
+  #  # needs: test_source_code
+  #  steps:
+  #    - name: Checkout code
+  #      uses: actions/checkout@v2
+  #    
+  #    - name: Setup Golang
+  #      uses: actions/setup-go@v2
+  #      with:
+  #        go-version: "^1.17"
+#
+  #    - name: Get the version
+  #      id: get_version
+  #      run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+#
+  #    - run: mkdir build
+#
+  #    - name: Build for linux amd64 (for now)
+  #      run: go run build.go --output build/qc-linux-amd64 --enable-cgo
+#
+  #    - uses: actions/upload-artifact@v2
+  #      with:
+  #        name: qc
+  #        path: build/
+    
+
+  # test_binary:
+  #   name: Test binary
+  #   runs-on: ubuntu-20.04
+      
+
+  #release_github:
+  #  name: Release to Github
+  #  runs-on: ubuntu-20.04
+  #  needs: build_binary
+  #  if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+  #  steps:
+  #    - name: Checkout code
+  #      uses: actions/checkout@v2
+#
+  #    - name: Get the version
+  #      id: get_version
+  #      run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+#
+  #    - uses: actions/download-artifact@v2
+  #      name: Download build artifact
+  #      with:
+  #        name: qc
+  #        path: build/
+  #    
+  #    - name: Release to Github
+  #      uses: softprops/action-gh-release@v1
+  #      with:
+  #        prerelease: false
+  #        files: |
+  #          build/qc-linux-amd64
+  #      env:
+  #        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #        VERSION: ${{ steps.get_version.outputs.VERSION }}
+
+
+  release_homebrew:
+    name: Release to Homebrew
+    runs-on: ubuntu-20.04
+    # needs: build_binary
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+
+      - name: Update Homebrew formula
+        uses: NSHipster/update-homebrew-formula-action@main
+        with:
+          repository: simse/homestead
+          tap: simse/homebrew-tap
+          formula: Formula/homestead.rb
+        env:
+          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
