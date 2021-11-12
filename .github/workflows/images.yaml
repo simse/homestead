@@ -37,8 +37,8 @@ jobs:
           push: true
           tags: ghcr.io/simse/homestead/base:latest
           platforms: linux/amd64,linux/arm64
-          cache-from: type=gha, scope=${{ github.workflow }}
-          cache-to: type=gha, scope=${{ github.workflow }}
+          cache-from: type=registry,ref=simse/homestead:buildcache
+          cache-to: type=registry,ref=simse/homestead:buildcache,mode=max
 
   build-language-images:
     name: Build Homestead image
@@ -76,5 +76,5 @@ jobs:
           push: true
           tags: ghcr.io/simse/homestead/${{ matrix.image }}:latest
           platforms: linux/amd64,linux/arm64
-          cache-from: type=gha, scope=${{ github.workflow }}
-          cache-to: type=gha, scope=${{ github.workflow }}
+          cache-from: type=registry,ref=simse/homestead:buildcache
+          cache-to: type=registry,ref=simse/homestead:buildcache,mode=max
