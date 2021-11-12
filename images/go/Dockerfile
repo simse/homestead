@@ -2,7 +2,7 @@ FROM ghcr.io/simse/homestead/base:latest
 
 # Labels
 LABEL org.opencontainers.image.description "A Homestead dev environment for Go"
-LABEL org.opencontainers.image.source="https://github.com/simse/homestead/tree/main/images/go"
+LABEL org.opencontainers.image.source="https://github.com/simse/homestead"
 LABEL org.opencontainers.image.authors="Simon Sorensen <simse>"
 
 ARG TARGETARCH

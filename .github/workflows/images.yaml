@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-base-images:
-    name: Build Homestead image
+    name: Build Homestead image (base)
     runs-on: ubuntu-latest
 
     steps:

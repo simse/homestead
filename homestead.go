@@ -49,6 +49,36 @@ func main() {
 				Usage:   "print Homestead version",
 				Action:  cmd.CmdVersion,
 			},
+			{
+				Name:    "dev",
+				Aliases: []string{"t"},
+				Usage:   "Homestead development command",
+				Action:  cmd.CmdDev,
+			},
+			{
+				Name:    "new",
+				Aliases: []string{"n"},
+				Usage:   "create new Homestead environment",
+				Action:  cmd.CmdNew,
+			},
+			{
+				Name:    "open",
+				Aliases: []string{"o"},
+				Usage:   "opens Homestead environment in VS Code",
+				Action:  cmd.CmdOpen,
+			},
+			{
+				Name:    "connect",
+				Aliases: []string{"c"},
+				Usage:   "connect to Homestead environment over SSH (not actually)",
+				Action:  cmd.CmdConnect,
+			},
+			{
+				Name: "delete",
+				//Aliases: []string{"c"},
+				Usage:  "delete Homestead environment",
+				Action: cmd.CmdDelete,
+			},
 		},
 	}
 
