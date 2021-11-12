@@ -7,6 +7,8 @@ LABEL org.opencontainers.image.authors="Simon Sorensen <simse>"
 
 ARG TARGETARCH
 
+USER root
+
 # Copy scripts
 WORKDIR /tmp/homestead
 COPY . /tmp/homestead/
@@ -15,13 +17,9 @@ COPY . /tmp/homestead/
 RUN bash install_go.sh
 ENV PATH="${PATH}:/usr/local/go/bin"
 
-# Create user
-RUN useradd -ms /bin/bash homestead
-RUN /usr/sbin/usermod -aG sudo homestead
-
+# Install Go dev tools
 USER homestead
-
 RUN bash install_dev_tools.sh
 
-RUN mkdir /home/homestead/workspace
-WORKDIR /home/homestead/workspace
+
+WORKDIR ${WORKSPACE}
