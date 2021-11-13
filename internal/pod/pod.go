@@ -13,11 +13,12 @@ import (
 
 // Pod represents a full Homestead environment
 type Pod struct {
-	ID           int `storm:"id,increment"`
-	FriendlyName string
-	Image        string
-	ImageOption  int
-	Volume       string
+	ID             int `storm:"id,increment"`
+	FriendlyName   string
+	Image          string
+	ImageOption    int
+	Volume         string
+	CommandOnStart string
 }
 
 // PodNameExists checks if a pod with the given name exists
@@ -53,4 +54,22 @@ func RemoveContainer(name string, cli *client.Client) error {
 // StartContainer will start a container given name
 func StartContainer(name string, cli *client.Client) error {
 	return cli.ContainerStart(context.Background(), name+"_homestead", types.ContainerStartOptions{})
+}
+
+// RunCommand will run a command in a container given name
+func RunCommand(name string, command string, cli *client.Client) error {
+	execId, err := cli.ContainerExecCreate(context.Background(), name+"_homestead", types.ExecConfig{
+		AttachStdin:  false,
+		AttachStdout: true,
+		AttachStderr: true,
+		Tty:          false,
+		Cmd:          []string{"/bin/sh", "-c", command},
+	})
+	if err != nil {
+		panic(err)
+	}
+
+	err = cli.ContainerExecStart(context.Background(), execId.ID, types.ExecStartCheck{})
+
+	return err
 }

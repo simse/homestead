@@ -23,7 +23,7 @@ func CmdConnect(c *cli.Context) error {
 
 	// exec.Command("docker", "exec", "-it", podName+"-homestead", "/bin/bash").Run()
 
-	fmt.Println("run: "+"docker", "exec", "-it", podName, "/bin/bash")
+	fmt.Println("run: "+"docker", "exec", "-it", podName+"_homestead", "/bin/bash")
 
 	return nil
 }

@@ -1,12 +1,11 @@
 package cmd
 
 import (
-	"github.com/simse/homestead/internal/pod"
 	"github.com/urfave/cli/v2"
 )
 
-func CmdDev(c *cli.Context) error {
-	client := pod.CreateClient()
+func CmdConfig(c *cli.Context) error {
+	// client := pod.CreateClient()
 
 	//pod.CreateVolume(client, "simons_test")
 	/*db := config.CreateDB(config.ConfigFileLocation())
@@ -23,7 +22,7 @@ func CmdDev(c *cli.Context) error {
 		fmt.Printf("%.2f%%\n", p)
 	}*/
 
-	pod.RunCommand("simons-test", "touch /home/homestead/test", client)
+	// pod.RunCommand("simons-test", "touch /home/homestead/test", client)
 
 	return nil
 }

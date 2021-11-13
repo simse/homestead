@@ -58,7 +58,7 @@ func CmdDelete(c *cli.Context) error {
 
 	// Remove from database
 	var podFromDb pod.Pod
-	db.One("Name", podName, &podFromDb)
+	db.One("FriendlyName", podName, &podFromDb)
 	db.DeleteStruct(&podFromDb)
 
 	fmt.Println("\nRemoved " + podName)
